@@ -21,6 +21,21 @@ critics={'Lisa Rose': {'Lady in the Water': 2.5, 'Snakes on a Plane': 3.5,
 
 from math import sqrt
 
+# Returns the Tanimoto similarity score
+def sim_tanimoto(prefs,p1,p2):
+  """Find the tanimoto between the two people"""
+  si={}
+  v1=0
+  v2=0
+  share=0
+  for item in prefs[p1]:
+    if item in prefs[p2]: share+=1
+  if share==0: return 0
+  v1=len(prefs[p1])
+  v2=len(prefs[p2])
+  score = 1-(float(share)/(v1+v2-share))
+  return score
+
 # Returns a distance-based similarity score for person1 and person2
 def sim_distance(prefs,person1,person2):
   # Get the list of shared_items
