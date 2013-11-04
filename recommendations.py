@@ -18,8 +18,37 @@ critics={'Lisa Rose': {'Lady in the Water': 2.5, 'Snakes on a Plane': 3.5,
  'The Night Listener': 3.0, 'Superman Returns': 5.0, 'You, Me and Dupree': 3.5},
 'Toby': {'Snakes on a Plane':4.5,'You, Me and Dupree':1.0,'Superman Returns':4.0}}
 
+tags={}
 
 from math import sqrt
+import deliciousapi
+
+# tagging lists
+dapi = deliciousapi.DeliciousAPI()
+programming = dapi.get_urls(tag="programming")
+coding = dapi.get_urls(tag="coding")
+program = dapi.get_urls(tag="program")
+java = dapi.get_urls(tag="java")
+python = dapi.get_urls(tag="python")
+computer = dapi.get_urls(tag="computer")
+code = dapi.get_urls(tag="code")
+api = dapi.get_urls(tag="api")
+development = dapi.get_urls(tag="development")
+develop = dapi.get_urls(tag="develop")
+
+def sim_tanimoto2(p1, p2):
+  """Find the tanimoto between two lists"""
+  share=0
+  print len(p1)
+  print len(p2)
+  for item in p1:
+    for p2item in p2:
+      if p2item==item:
+        share+=1
+        print 'same item '+item
+  if share==0: return 0
+  score = (float(share)/(len(p1)+len(p2)-share))
+  return score 
 
 # Returns the Tanimoto similarity score
 def sim_tanimoto(prefs,p1,p2):
